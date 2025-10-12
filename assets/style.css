@@ -1,0 +1,414 @@
+/* === Global Reset === */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #005eff, #eaf3ff);
+    color: #222;
+    scroll-behavior: smooth;
+}
+
+/* === Container === */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* === Header === */
+.header {
+    background: linear-gradient(90deg, #007BFF, #00C6FF);
+    color: rgb(255, 255, 255);
+    padding: 1rem 0;
+    box-shadow: 0 3px 10px rgba(0, 123, 255, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.logo-badge {
+    background: white;
+    color: #007BFF;
+    border-radius: 6px;
+    padding: 3px 7px;
+    margin-right: 6px;
+}
+
+.logo-kelompok {
+    width: 80px;
+    /* sesuaikan ukuran */
+    height: auto;
+    /* agar proporsional */
+    margin-left: 10px;
+}
+
+
+.nav a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.nav a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    left: 0;
+    bottom: -5px;
+    background: white;
+    transition: width 0.3s;
+}
+
+.nav a:hover::after,
+.nav a.active::after {
+    width: 100%;
+}
+
+/* === About Section Center === */
+.kelompok {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Vertikal tengah */
+    align-items: center;
+    /* Horizontal tengah */
+    text-align: center;
+    min-height: 75vh;
+    /* Bisa diubah ke 100vh kalau mau pas layar penuh */
+    background: linear-gradient(180deg, #ffffff, #30d2ff);
+}
+
+.kelompok-text {
+    max-width: 700px;
+    animation: fadeInUp 1s ease;
+    margin: auto;
+}
+
+.kelompok-text h1 {
+    font-size: 2.5rem;
+    color: #007BFF;
+    margin-bottom: 1rem;
+}
+
+.kelompok-text p {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+
+.highlight {
+    /* Fallback color untuk browser yang tidak support */
+    color: #007BFF;
+
+    /* Gradient background */
+    background: linear-gradient(90deg, #007BFF, #00C6FF);
+
+    /* Webkit browsers (Chrome, Safari) */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Standard property untuk browser modern */
+    background-clip: text;
+    color: transparent;
+
+    font-weight: 700;
+    display: inline-block;
+    /* Penting untuk beberapa browser */
+}
+
+.kelompok-text p {
+    color: #444;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, #007BFF, #00C6FF);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 10px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 118, 255, 0.3);
+}
+
+.kelompok-image img {
+    width: 75px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.25);
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* === Team Cards === */
+.team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-top: 3rem;
+}
+
+.team-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 25px;
+    width: 280px;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 123, 255, 0.25);
+}
+
+.team-photo {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 4px solid #007BFF;
+    transition: border 0.3s;
+}
+
+.team-card:hover .team-photo {
+    border-color: #00C6FF;
+}
+
+/* === Social Media Links === */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 15px;
+}
+
+.social-links a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.social-links a:hover {
+    color: #00C6FF;
+    transform: translateY(-3px);
+}
+
+/* === Footer === */
+.site-footer {
+    background: linear-gradient(90deg, #007BFF, #00C6FF);
+    color: white;
+    text-align: center;
+    padding: 1.2rem;
+    margin-top: 4rem;
+    font-weight: 500;
+}
+
+/* === Portfolio Section === */
+.portfolio-grid a.card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    position: relative;
+}
+
+.portfolio-grid a.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #007BFF, #00C6FF);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.portfolio-grid a.card:hover::before {
+    transform: scaleX(1);
+}
+
+.portfolio-grid a.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 123, 255, 0.15);
+}
+
+.portfolio-grid a.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.portfolio-grid a.card:hover img {
+    transform: scale(1.08);
+}
+
+.portfolio-grid a.card h3 {
+    color: #007BFF;
+    margin: 1.5rem 1rem 0.5rem;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.portfolio-grid a.card p {
+    padding: 0 1.5rem;
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 1.5rem 0;
+}
+
+
+/* === Contact Page === */
+.content-section {
+    padding: 4rem 0;
+    text-align: center;
+    background: linear-gradient(180deg, #ffffff, #30d2ff);
+    animation: fadeInUp 0.8s ease;
+}
+
+.content-section h1 {
+    font-size: 2.2rem;
+    color: #007BFF;
+    margin-bottom: 1rem;
+}
+
+.content-section p {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+/* Team Grid Reuse (Enhanced) */
+.team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem;
+    margin-top: 2rem;
+}
+
+.team-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 6px 16px rgba(0, 123, 255, 0.1);
+    text-align: center;
+    padding: 30px;
+    width: 280px;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 24px rgba(0, 123, 255, 0.25);
+}
+
+.team-photo {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 4px solid #007BFF;
+    transition: border 0.3s, transform 0.3s;
+}
+
+.team-card:hover .team-photo {
+    border-color: #00C6FF;
+    transform: scale(1.05);
+}
+
+.team-card h3 {
+    color: #007BFF;
+    margin: 10px 0 5px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.team-card p {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 10px;
+}
+
+.social-links a {
+    background: linear-gradient(90deg, #007BFF, #00C6FF);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: #005fcc;
+    transform: translateY(-3px);
+}
+
+/* === Animation Keyframes === */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
