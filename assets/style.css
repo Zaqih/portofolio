@@ -406,8 +406,8 @@ body {
     align-items: center;
     justify-content: center;
     padding: 4rem 2rem;
-    background: linear-gradient(180deg, #ffffff, #bfe9ff);
-    min-height: 90vh;
+    background: linear-gradient(180deg, #ffffff, #30d2ff);
+    min-height: 75vh;
     animation: fadeInUp 0.8s ease;
 }
 
