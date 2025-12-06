@@ -5,44 +5,267 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>DAZ</title>
-    <link rel="stylesheet" href="assets/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.375rem 1rem;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #667eea30;
+            border-radius: 9999px;
+            font-weight: 600;
+            color: #667eea;
+            transition: all 0.3s;
+        }
+
+        .tag:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-glow {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-glow::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn-glow:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .hero-image {
+            animation: floatImage 6s ease-in-out infinite;
+        }
+
+        @keyframes floatImage {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
 </head>
 
-<body>
-    <header class="header glass">
-        <div class="logo-kelompok">
-            <img src="assets/logo.png" alt="Logo DAZ" class="logo-kelompok">
-        </div>
-        <div class="container">
-            <br>
-            <nav class="nav">
-                <a href="index.html" class="active">Home</a>
-                <a href="about.html">About</a>
-                <a href="portofolio.html">Portofolio</a>
-                <a href="experience.html">Experience</a>
-                <a href="contact.html">Contact</a>
-            </nav>
+<body class="bg-gradient-to-br from-slate-50 via-white to-purple-50 min-h-screen">
+    <!-- Background Blobs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="blob w-96 h-96 bg-purple-400 top-0 -left-48" style="animation-delay: 0s;"></div>
+        <div class="blob w-96 h-96 bg-blue-400 bottom-0 -right-48" style="animation-delay: 2s;"></div>
+        <div class="blob w-96 h-96 bg-indigo-400 top-1/2 right-0" style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+               <div class="flex-shrink-0 -ml-2">
+                    <img src="assets/logo.png" alt="Logo DAZ" class="h-16 w-auto rounded-lg shadow-lg" style="filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));">
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link active text-purple-600 font-medium">Home</a>
+                    <a href="about.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">About</a>
+                    <a href="portofolio.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Portfolio</a>
+                    <a href="experience.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Experience</a>
+                    <a href="contact.html" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Contact</a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-gray-100" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden pb-4">
+                <div class="flex flex-col space-y-3">
+                    <a href="index.html" class="text-purple-600 font-medium py-2">Home</a>
+                    <a href="about.html" class="text-gray-600 hover:text-gray-900 font-medium py-2">About</a>
+                    <a href="portofolio.html" class="text-gray-600 hover:text-gray-900 font-medium py-2">Portfolio</a>
+                    <a href="experience.html" class="text-gray-600 hover:text-gray-900 font-medium py-2">Experience</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-gray-900 font-medium py-2">Contact</a>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main class="kelompok">
-        <div class="container kelompok-content">
-            <div class="kelompok-text">
-                <h1>Selamat Datang di <span class="highlight">DAZ Company</span></h1>
-                <p>
-                    Kami adalah tim kreatif yang terdiri dari <b>Duta</b>, <b>Asfa</b>, dan <b>Zacky</b> —
-                    berfokus pada pengembangan <span class="tag"></span><span class="tag">Desain</span>, dan <span
-                        class="tag">Web</span>.
-                </p>
-                <a href="about.html" class="btn-primary glow">Lihat Anggota Kami</a>
-            </div>
+    <!-- Hero Section -->
+    <main class="relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center justify-between min-h-[calc(100vh-5rem)] py-16 sm:py-24 gap-12">
+                <!-- Text Content -->
+                <div class="flex-1 text-center lg:text-left fade-in-up">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+                        Selamat Datang di<br>
+                        <span class="gradient-text">DAZ Company</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Kami adalah tim kreatif yang terdiri dari <b class="text-gray-900">Duta</b>, <b class="text-gray-900">Asfa</b>, dan <b class="text-gray-900">Zacky</b> —
+                        berfokus pada pengembangan
+                    </p>
+                    
+                    <!-- Tags -->
+                    <div class="flex flex-wrap gap-3 justify-center lg:justify-start mb-10">
+                        <span class="tag">Web Development</span>
+                        <span class="tag">Design</span>
+                        <span class="tag">Innovation</span>
+                    </div>
 
+                    <!-- CTA Button -->
+                    <a href="about.html" class="btn-glow inline-block px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-full shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+                        <span class="relative z-10">Lihat Anggota Kami</span>
+                    </a>
+                </div>
+
+                <!-- Hero Image/Illustration -->
+                <div class="flex-1 hidden lg:flex items-center justify-center fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="hero-image relative w-full max-w-lg">
+                        <div class="absolute inset-0 bg-gradient-to-r from-purple-400 to-blue-400 rounded-full blur-3xl opacity-30"></div>
+                        <svg class="relative w-full h-auto" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Decorative circles and shapes -->
+                            <circle cx="250" cy="250" r="200" fill="url(#gradient1)" opacity="0.1"/>
+                            <circle cx="250" cy="250" r="150" fill="url(#gradient2)" opacity="0.15"/>
+                            <circle cx="250" cy="250" r="100" fill="url(#gradient3)" opacity="0.2"/>
+                            
+                            <!-- Code brackets -->
+                            <path d="M150 200 L120 230 L150 260" stroke="url(#gradient4)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M350 200 L380 230 L350 260" stroke="url(#gradient4)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                            
+                            <!-- Dots -->
+                            <circle cx="250" cy="230" r="6" fill="#667eea"/>
+                            <circle cx="230" cy="230" r="6" fill="#764ba2"/>
+                            <circle cx="270" cy="230" r="6" fill="#667eea"/>
+                            
+                            <defs>
+                                <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#764ba2;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#667eea;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="gradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="gradient4" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
-    <footer class="site-footer glass">
-        <div class="container"> © 2025 DAZ Company — Duta, Asfa, Zacky</div>
+    <!-- Footer -->
+    <footer class="relative mt-auto bg-white/80 backdrop-blur-md border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="text-center">
+                <p class="text-gray-600">© 2025 DAZ Company — Duta, Asfa, Zacky</p>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Add scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+    </script>
 </body>
 
 </html>
